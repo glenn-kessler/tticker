@@ -1,0 +1,14 @@
+R001 provide a sheet with 1+n topics
+R002 seperate each topic into 1+n weeks
+R003 topics may be chosen from a list
+R004 new topics may be added to the list 
+R005 if a field in a topic is left-clicked, it's counter is increased to a defined maximum
+R006 if a field in a topic is right-clicked, it's counter is decreased to a minimum of zero
+R007 each time a counter is in- or decreased, a graphic is updated
+R008 each time a power of 5 is exceeded, another graphic is added to the topic
+R009 a weeks width and hight correspond to the one topic with the highest count
+R010 within a week, the graphic is updated or added on the left side for powers from 0 to 5
+R011 within a week, the graphic is updated or added on the right sid for powers of 10
+R012 
+R013 
+
