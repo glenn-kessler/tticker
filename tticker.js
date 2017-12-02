@@ -1,11 +1,37 @@
-window.onload = function () {
-  tticker.initHTML()
-}
-
 var tticker = {
-  cols : 7,
-  rows : 6,
-  fil : 13,
+  rows : 4,
+  tasks : [''],
+
+  popTask : function() {
+    let text = document.getElementById('text').value;
+    if (text!='') {
+      console.log('ddd',text)
+      this.tasks.push(text)
+    }
+    this.initHTML() // display
+  },
+
+  pushOrPopTask : function(ev,text) {
+
+    if (ev.key==='Enter') // on Enter push()
+      if (text!='')
+        this.tasks.push(text)
+
+    if (ev.key==='Escape') // on Escape pop()
+        this.tasks.pop()
+
+    if ( this.tasks.length <= 0) // reset array if empty
+      this.tasks = ['']
+
+    this.initHTML() // display
+  },
+
+  popppTask : function() {
+    if ( this.tasks.length > 1)
+      this.tasks.pop()
+    this.initHTML()
+  },
+
 
   initHTML : function () {
     let textField = document.getElementById('debug')
@@ -14,15 +40,22 @@ var tticker = {
     let counter = ' data-counter=0'
     let clickedLeft = ' onclick=window.tticker.dataCounter(this,1)'
     let clickedRight = ' oncontextmenu=window.tticker.dataCounter(this,-1)'
-    let end = '> Z </td>'
+    let end = '> </td>'
 
     for (let y = 0; y < this.rows; y++) {
       str += '<tr>'
-      for (let x = 0; x < this.cols; x++) {
-        _x = ' data-x=' + String(x)
-        _y = ' data-y=' + String(y)
-        id = ' id='  + String(y)  + String(x)
-        str += td + id + _x + _y + counter + clickedLeft + clickedRight + end
+      if (y==0) {
+        for (name in this.tasks) {
+          str += '<th>' + this.tasks[name] + '</th>'
+        }
+      }
+      else {
+        for (x in this.tasks) {
+          _x = ' data-x=' + String(x)
+          _y = ' data-y=' + String(y)
+          id = ' id='  + String(y)  + String(x)
+          str += td + id + _x + _y + counter + clickedLeft + clickedRight + end
+        }
       }
       str += '</tr>'
     }
@@ -31,16 +64,16 @@ var tticker = {
     textField.innerHTML = str
   },
 
+  // int1 = ( +1 || -1 )
   dataCounter : function (ev, int1) {
     count = parseInt(ev.getAttribute("data-counter"))
-    if (count <= 0 && int1 == -1) {
+
+    //
+    if (count <= 0 && int1 == -1)
       count = 0
-      ev.setAttribute("data-counter", "0")
-    } 
-    else {
+    else
       count = count+int1
-      ev.setAttribute("data-counter", count)
-    } 
+    ev.setAttribute("data-counter", count)
     this.ticker(ev, count)
   },
 
@@ -50,19 +83,20 @@ var tticker = {
     let ticks = count % 5
     let i = parseInt(count / 5)
     let j = 0
-
+   
+    // place count/5 times full tick-blocks
     for (i; i > 0; i--) {
       str += '<s>||||</s> '
       j++
+      // linebreak after each two full tick-blocks
       if (j >= 2) {
         j = 0
         str += '<br>'
       }
     }
+    // place non-full tick-blocks
     str += remaining[ticks]
     ev.innerHTML = str
-    console.log(str)
-    console.log(ticks)
   },
 }
 

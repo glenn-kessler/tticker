@@ -8,23 +8,14 @@
 		<link
 		rel="stylesheet"
 		type="text/css"
-		href="site.css">
+		href="tticker.css">
 
-		<script src=jquery-2014-10-24.js></script>
-		<script type="text/javascript" src="ticker.js"></script>
-		
+		<script type="text/javascript" src="tticker.js"></script>		
 	</head>	
 	
 	<body>	
 		<div id=content>
 			<div id=header>
-				<h1>
-					<a href="">Task Ticker</a>
-				</h1>
-
-				<img id=userimage
-					src=lab1.png
-					alt="a picture of the author."/>
 			</div>
 		
 			<div id=main>
@@ -36,25 +27,20 @@
 				</h2>
 
 				<div id=board>
-				</div>
+			      <label>Name :</label>
+        		  <input type=text placeholder=Name id=text onkeypress="window.tticker.pushOrPopTask(event,this.value)">
+		          <input type=button onclick="(function popTask() { window.tticker.popTask() } ) ()">
+		    	</div>
 
 				<div id=statusline>
 				</div>
 			</div>
 
-			<div id="debug">
-				<p>example</p>
-				<p>example</p>
-				<p>example</p>
-				<p>example</p>
-				<p>example</p>
-				<p>example</p>
-				<p>example</p>
-				<p>example</p>
+			<div id=debug>
 			</div>
 		
 			<div id=footer>
-				<p id="demo">I am a footer =)</p>
+				<p id=demo>I am a footer =)</p>
 			</div>
 		</div>
 	</body>	
