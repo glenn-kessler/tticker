@@ -1,39 +1,35 @@
-var tticker = {
-  rows : 4,
-  tasks : [''],
+window.tticker = {
+  rows: 4,
+  tasks: [''],
 
-  popTask : function() {
+  pushTask: function() {
     let text = document.getElementById('text').value;
-    if (text!='') {
-      console.log('ddd',text)
+    if (text != '') {
       this.tasks.push(text)
     }
     this.initHTML() // display
   },
 
-  pushOrPopTask : function(ev,text) {
-
-    if (ev.key==='Enter') // on Enter push()
-      if (text!='')
-        this.tasks.push(text)
-
-    if (ev.key==='Escape') // on Escape pop()
-        this.tasks.pop()
-
-    if ( this.tasks.length <= 0) // reset array if empty
-      this.tasks = ['']
+  popTask: function(ev) {
+    if ( this.tasks.length > 1)
+      this.tasks.pop()
 
     this.initHTML() // display
   },
 
-  popppTask : function() {
-    if ( this.tasks.length > 1)
-      this.tasks.pop()
-    this.initHTML()
+  pushOrPopTask: function(ev, text) {
+    if (ev.key === 'Enter') // on Enter push()
+      if (text != '')
+        this.tasks.push(text)
+
+    if (ev.key==='Escape') // on Escape pop()
+      if (this.tasks.length > 1)
+        this.tasks.pop()
+
+    this.initHTML() // display
   },
 
-
-  initHTML : function () {
+  initHTML: function () {
     let textField = document.getElementById('debug')
     let str = '<table>'
     let td = '<td'
@@ -65,7 +61,7 @@ var tticker = {
   },
 
   // int1 = ( +1 || -1 )
-  dataCounter : function (ev, int1) {
+  dataCounter: function (ev, int1) {
     count = parseInt(ev.getAttribute("data-counter"))
 
     //
@@ -77,7 +73,7 @@ var tticker = {
     this.ticker(ev, count)
   },
 
-  ticker : function (ev, count) {
+  ticker: function (ev, count) {
     let str = ''
     let remaining = ['', '|', '||', '|||', '||||']
     let ticks = count % 5
@@ -99,5 +95,3 @@ var tticker = {
     ev.innerHTML = str
   },
 }
-
-window.tticker = tticker
